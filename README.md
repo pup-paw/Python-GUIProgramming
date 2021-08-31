@@ -9,6 +9,6 @@
     목표 기간 : 2021/08/27 ~ 2021/08/31
 ### 🏃‍♂️How is it going?🏃‍♂️
   > - [x] 기본기 | [gui_basics](https://github.com/pup-paw/Python-GUIProgramming/tree/main/gui_basic)
-  > - [ ] 프로젝트 | [gui_project]()
+  > - [x] 프로젝트 | [gui_project](https://github.com/pup-paw/Python-GUIProgramming/tree/main/gui_project)
 ### 🎖result🎖
-  > 
+  > 2021/08/31 완강!

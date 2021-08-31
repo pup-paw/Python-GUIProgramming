@@ -12,31 +12,34 @@
 # 6. 프로그램 크기, 위치는 자유롭게 하되 크기 조정 가능해야 함
 # 7. 본문 우측에 상하 스크롤바 넣기
 
+import os
 from tkinter import *
 
 root = Tk()
 root.title("제목 없음 - Windows 메모장")
 
-txt = Text(root)
-txt.pack(side=LEFT, fill=BOTH)
-
 scrollbar = Scrollbar(root)
-scrollbar.pack(side=RIGHT, fill=BOTH)
+scrollbar.pack(side="right", fill="y")
+
+txt = Text(root, yscrollcommand=scrollbar.set)
+txt.pack(fill="both", expand=1)
+
+scrollbar.config(command=Listbox.yview)
+
+filename = "gui_basic/mynote.txt"
 
 
 def open_file():
-    myfile = open('gui_basic/mynote.txt', 'r')
-    mystring = myfile.read()
-    txt.delete("1.0", END)
-    txt.insert("1.0", mystring)
-    myfile.close()
+    if os.path.isfile(filename):
+        with open(filename, "r", encoding="utf8") as file:
+            txt.delete("1.0", END)
+            txt.insert("1.0", file.read())
 
 
 def save_file():
-    myfile = open('gui_basic/mynote.txt', 'w')
-    mystring = txt.get("1.0", END)
-    myfile.write(mystring)
-    myfile.close()
+    if os.path.isfile(filename):
+        with open(filename, "w", encoding="utf8") as file:
+            file.write(txt.get("1.0", END))
 
 
 menu = Menu(root)
@@ -60,4 +63,5 @@ menu_help = Menu(menu, tearoff=0)
 menu.add_cascade(label="도움말", menu=menu_format)
 
 root.config(menu=menu)
+
 root.mainloop()

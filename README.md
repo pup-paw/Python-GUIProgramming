@@ -8,7 +8,7 @@
   > 강의 : Inflearn | 나도코딩 | 파이썬 무료 강의 (활용편2) - GUI 프로그래밍<br>
     목표 기간 : 2021/08/27 ~ 2021/08/31
 ### 🏃‍♂️How is it going?🏃‍♂️
-  > - [ ] 기본기 | [gui_basics](https://github.com/pup-paw/Python-GUIProgramming/tree/main/gui_basic)
+  > - [x] 기본기 | [gui_basics](https://github.com/pup-paw/Python-GUIProgramming/tree/main/gui_basic)
   > - [ ] 프로젝트 | [gui_project]()
 ### 🎖result🎖
   > 

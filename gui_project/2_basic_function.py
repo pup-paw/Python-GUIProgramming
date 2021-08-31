@@ -1,17 +1,71 @@
 import tkinter.ttk as ttk
-from tkinter import *
+import tkinter.messagebox as msgbox
+from tkinter import *  # __all__
+from tkinter import filedialog  # 서브 모듈은 다시 작성해야 사용 가능
 
 root = Tk()
 root.title("pup-paw GUI")
+
+# 파일 추가
+
+
+def add_file():
+    files = filedialog.askopenfilenames(title="이미지 파일을 선택하세요",
+                                        filetypes=(("PNG파일", "*.png"),
+                                                   ("모든 파일", "*.*")),
+                                        initialdir="/Users/pup-paw/OneDrive/사진/")  # initialdir : 최초에 사용자가 지정한 경로를 보여줌
+    # 사용자가 선택한 파일 목록
+    for file in files:
+        list_file.insert(END, file)
+
+# 선택 삭제
+
+
+def del_file():
+    for index in reversed(list_file.curselection()):
+        list_file.delete(index)
+
+# 저장 경로
+
+
+def browse_dest_path():
+    folder_selected = filedialog.askdirectory()
+    if folder_selected is None:  # 사용자가 취소를 누를 때
+        return
+
+    txt_dest_path.delete(0, END)
+    txt_dest_path.insert(0, folder_selected)
+
+# 시작
+
+
+def start():
+    # 각 옵션들 값을 확인
+    print("가로넓이 : ", cmb_width.get())
+    print("간격 : ", cmb_space.get())
+    print("포맷 : ", cmb_format.get())
+
+    # 파일 목록 확인
+    if list_file.size() == 0:
+        msgbox.showwarning("경고", "이미지 파일을 추가하세요")
+        return
+
+    # 저장 경로 확인
+    if len(txt_dest_path.get()) == 0:
+        msgbox.showwarning("경고", "저장 경로를 선택하세요")
+        return
+
 
 # 파일 프레임 (파일 추가, 선택 삭제)
 file_frame = Frame(root)
 file_frame.pack(fill="x", padx=5, pady=5)
 
-btn_add_file = Button(file_frame, padx=5, pady=5, width=12, text="파일 추가")
+btn_add_file = Button(file_frame, padx=5, pady=5,
+                      width=12, text="파일 추가", command=add_file)
 btn_add_file.pack(side="left")
 
-btn_del_file = Button(file_frame, padx=5, pady=5, width=12, text="선택삭제")
+btn_del_file = Button(file_frame, padx=5, pady=5,
+                      width=12, text="선택삭제", command=del_file)
 btn_del_file.pack(side="right")
 
 # 리스트 프레임
@@ -34,7 +88,8 @@ txt_dest_path = Entry(path_frame)
 txt_dest_path.pack(side="left", fill="x", expand=True, padx=5, pady=5,
                    ipady=4)  # ipady : 안쪽 패딩 y 길이 설정 <-> ipadx
 
-btn_dest_path = Button(path_frame, text="찾아보기", width=10)
+btn_dest_path = Button(path_frame, text="찾아보기",
+                       width=10, command=browse_dest_path)
 btn_dest_path.pack(side="right", padx=5, pady=5)
 
 # 옵션 프레임
@@ -91,7 +146,8 @@ btn_close = Button(frame_run, padx=5, pady=5, text="닫기",
                    width=15, command=root.quit)
 btn_close.pack(side="right", padx=5, pady=5)
 
-btn_start = Button(frame_run, padx=5, pady=5, text="시작", width=12)
+btn_start = Button(frame_run, padx=5, pady=5,
+                   text="시작", width=12, command=start)
 btn_start.pack(side="right", padx=5, pady=5)
 
 root.resizable(False, False)
